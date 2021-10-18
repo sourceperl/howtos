@@ -15,24 +15,41 @@ ssh-copy-id [USERNAME]@[REMOTE_HOST]
 
 ## Local port forward 
 
-Run on client side, open CLIENT_PORT on localhost interface and forward it to existing SERVER_IP:SERVER_PORT.
+Open LOCAL_PORT on LOCAL_IP and forward it to remote at REMOTE_IP:REMOTE_PORT.
 
 ```bash
 # -L option indicates local
 # -N option to only forward ports (don't open shell)
 # -f option to run in the background
-ssh -L CLIENT_PORT:127.0.0.1:SERVER_PORT -N [USERNAME]@[SERVER_IP]
+ssh -L LOCAL_IP:LOCAL_PORT:REMOTE_IP:REMOTE_PORT -N [USERNAME]@[SERVER_IP]
+```
+
+### Example
+
+Forward http (tcp/80) of host 172.18.40.16 to local port tcp/8080 (LISTEN 
+on localhost).
+
+```bash
+ssh -L 127.0.0.1:8080:127.0.0.1:80 -N user@172.18.40.16
 ```
 
 
 ## Remote port forward 
 
-Run on server side, forward local existing SERVER_PORT to remote CLIENT_PORT (open it). 
+Open REMOTE_PORT on REMOTE_IP and forward it to LOCAL_IP:LOCAL_PORT app.
 
 ```bash
 # -R option indicates remote
 # -N option to only forward ports (don't open shell)
 # -f option to run in the background
-ssh -R CLIENT_PORT:127.0.0.1:SERVER_PORT -N [USERNAME]@[CLIENT_IP]
+ssh -R REMOTE_IP:REMOTE_PORT:LOCAL_IP:LOCAL_PORT -N [USERNAME]@[CLIENT_IP]
 ```
 
+### Example
+
+Open port tcp/8080 (LISTEN on localhost) of 172.18.40.16, forward content
+to local app at port tcp/80.
+
+```bash
+ssh -R 127.0.0.1:8080:127.0.0.1:80 -N user@172.18.40.16
+```
