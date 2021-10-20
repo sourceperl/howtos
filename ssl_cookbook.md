@@ -1,17 +1,6 @@
 # SSL cookbook
 
 
-## Browser certficate manager shortcut
-
-### Chrome
-
-chrome://settings/certificates
-
-### Firefox
-
-about:preferences#privacy
-
-
 ## Generate a private key and a self-signed certificate 
 
 ```bash
@@ -65,3 +54,14 @@ Extract subject from a certficate
 ```bash
 openssl crl2pkcs7 -nocrl -certfile myserver-public.cert | openssl pkcs7 -print_certs -noout | grep subject
 ```
+
+
+## Browser certficate manager shortcut
+
+### Chrome
+
+chrome://settings/certificates
+
+### Firefox
+
+about:preferences#privacy
