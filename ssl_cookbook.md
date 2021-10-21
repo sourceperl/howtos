@@ -27,7 +27,7 @@ openssl req -new -key CA-private.key -x509 -days 9132 -out CA-public.cert \
             -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Custom Authority/CN=My Custom Authority Root CA"
 ```
 
-Sign a certficate with this CA, for host with a FQDN (here www.example.com)
+Sign a certficate with this CA for host with a FQDN (here www.example.com)
 
 ```bash
 # init custom authority: CA-private.key/CA-public.cert
@@ -41,7 +41,7 @@ openssl x509 -req -days 1825 -in www-public.csr -CA CA-public.cert -CAkey CA-pri
 ```
 
 
-Sign a certficate with this CA, for host with an IPv4 address (here private 192.168.1.45)
+Sign a certficate with this CA for host with an IPv4 address (here private 192.168.1.45)
 
 ```bash
 # init custom authority: CA-private.key/CA-public.cert
@@ -49,8 +49,8 @@ Sign a certficate with this CA, for host with an IPv4 address (here private 192.
 cat <<EOF >ssl.conf
 [ req ]
 prompt             = no
-req_extensions     = req_v3
 distinguished_name = req_dn
+req_extensions     = req_v3
 
 [ req_dn ]
 C=FR
