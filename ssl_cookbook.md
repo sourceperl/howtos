@@ -16,15 +16,15 @@ cat ${f_prefix}-public.crt ${f_prefix}-private.key > ${f_prefix}-private.pem
 
 ## Create a custom authority to sign certificates
 
-Create CA.
+Create a root CA.
 
 ```bash
 # init custom authority: CA-private.key/CA-public.cert
 # create a private key (RSA 4096 bit long) PEM encode
 openssl genrsa -out CA-private.key 4096
 # create a self-signed certicate for this private key
-openssl req -new -key CA-private.key -x509 -days 3650 -out CA-public.cert \
-            -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Custom Authority/OU=/CN="
+openssl req -new -key CA-private.key -x509 -days 9132 -out CA-public.cert \
+            -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Custom Authority/CN=My Custom Authority Root CA"
 ```
 
 Sign a certficate with this CA.
