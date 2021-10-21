@@ -27,7 +27,7 @@ openssl req -new -key CA-private.key -x509 -days 9132 -out CA-public.cert \
             -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Custom Authority/CN=My Custom Authority Root CA"
 ```
 
-Sign a certficate with this CA.
+Sign a certficate with this CA, for host with a FQDN (here myserver.example.com)
 
 ```bash
 # init custom authority: CA-private.key/CA-public.cert
@@ -35,9 +35,9 @@ Sign a certficate with this CA.
 openssl genrsa -out myserver-private.key 2048
 # create a CSR (Certificate Signing Request) for this private key
 openssl req -new -key myserver-private.key -out myserver-public.csr \
-            -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Little Company/OU=/CN=192.168.1.45"
+            -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Little Company/OU=MLC server division/CN=myserver.example.com"
 # sign this CSR, produce a CERT
-openssl x509 -req -days 3650 -in myserver-public.csr -CA CA-public.cert -CAkey CA-private.key -CAcreateserial -out myserver-public.cert
+openssl x509 -req -days 1825 -in myserver-public.csr -CA CA-public.cert -CAkey CA-private.key -CAcreateserial -out myserver-public.cert
 ```
 
 
