@@ -38,17 +38,16 @@ Sign a certficate with this CA for host with a FQDN (here www.example.com)
 
 ```bash
 # init custom authority: CA-private.key/CA-public.cert
-# create a private key (RSA 2048 bits long) PEM encode
-openssl genrsa -out www-private.key 2048
-# create a CSR (Certificate Signing Request) for this private key
-openssl req -new \
+# create aa private key and a CSR (Certificate Signing Request)
+openssl req -new -nodes \
+            -newkey rsa:2048 \
             -subj "/C=FR/ST=Haut-de-France/L=Lille/O=My Little Company/OU=MLC server division/CN=www.example.com" \
-            -key www-private.key \
+            -keyout www-private.key \
             -out www-public.csr
-# sign this CSR with CA certficate and his private key, produce a signed certficate
+# sign this CSR with CA certficate and its private key, produce a signed certficate
 openssl x509 -req -days 1825 \
-             -in www-public.csr \
              -CA CA-public.cert -CAkey CA-private.key -CAcreateserial \
+             -in www-public.csr \
              -out www-public.cert
 ```
 
