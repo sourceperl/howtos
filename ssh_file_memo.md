@@ -15,8 +15,9 @@ id_<key-algorithm>_<servername>_<purpose>.<format-information>
 
 ## Some shell command
 ```bash
-# produce OpenSSh private key and 
-ssh-keygen -t rsa -b 4096 -C '' -f id_rsa_srv1_shell.pk
+# produce OpenSSH private key(.pk) and public key (.pub)
+ssh-keygen -t rsa -b 4096 -C '' -f id_rsa_srv1_shell
+mv id_rsa_srv1_shell id_rsa_srv1_shell.pk
 
 # OpenSSH private key -> PuTTY private key 
 # debian package putty-tools provide puttygen tool
