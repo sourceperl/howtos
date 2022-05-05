@@ -9,7 +9,6 @@ id_<key-algorithm>_<servername>_<purpose>.<format-information>
 - OpenSSH private key:  .pk
 - OpenSSH public key:   .pub
 - PuTTY private key:    .ppk
-- PuTTy public key:     .ppubk
 
 *For example id_rsa_myserver_shell.pk is a RSA private key for shell access to myserver with OpenSSH.*
 
