@@ -11,14 +11,23 @@ id_<key-algorithm>_<servername>_<purpose>.<format-information>
 - PuTTY private key:    .ppk
 - PuTTy public key:     .ppubk
 
-*For example id_rsa_myservername_shell.pk is a RSA private key for shell access to myserver with OpenSSH.*
+*For example id_rsa_myserver_shell.pk is a RSA private key for shell access to myserver with OpenSSH.*
 
 ## Some shell command
 ```bash
 # produce OpenSSh private key and 
-ssh-keygen -t rsa -b 4096 -C '' -f id_rsa_loos-sv1_shell.pk
+ssh-keygen -t rsa -b 4096 -C '' -f id_rsa_srv1_shell.pk
 
 # OpenSSH private key -> PuTTY private key 
 # debian package putty-tools provide puttygen tool
-puttygen id_rsa_loos-sv1_shell.pk -o id_rsa_loos-sv1_shell.ppk
+puttygen id_rsa_srv1_shell.pk -o id_rsa_srv1_shell.ppk
+
+# PuTTY private key -> OpenSSH private key
+puttygen id_rsa_srv1_shell.ppk -O private-openssh-new -o id_rsa_srv1_shell.pk
+
+# extract OpenSSH public key (same format as ~/.ssh/authorized_keys) from OpenSSH private key 
+ssh-keygen -y -f id_rsa_srv1_shell.pk > id_rsa_srv1_shell.pub
+
+# add public key to trust list for current linux user
+cat id_rsa_srv1_shell.pub >> ~/.ssh/authorized_keys
 ```
