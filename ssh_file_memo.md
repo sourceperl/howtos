@@ -32,5 +32,5 @@ ssh-keygen -y -f id_rsa_srv1_shell.pk > id_rsa_srv1_shell.pub
 cat id_rsa_srv1_shell.pub >> ~/.ssh/authorized_keys
 
 # get all currently authorized public key fingerprints
-ssh-keygen -l -f < ~/.ssh/authorized_keys
+ssh-keygen -l -f - < ~/.ssh/authorized_keys
 ```
