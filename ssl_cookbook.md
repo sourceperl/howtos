@@ -113,7 +113,7 @@ openssl crl2pkcs7 -nocrl -certfile myserver-public.cert | openssl pkcs7 -print_c
 
 ### Chrome
 
-chrome://settings/certificates
+chrome://settings/security
 
 ### Firefox
 
