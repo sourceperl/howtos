@@ -14,7 +14,7 @@ sudo nano /boot/cmdline.txt
 
 *This avoid kernel use /dev/serial0 as a system console.*
 
-* Disable bluetooth chip
+* Disable bluetooth (device tree and hciuart service)
 
 ```bash
 echo "dtoverlay=disable-bt" | sudo tee -a /boot/config.txt
