@@ -1,0 +1,27 @@
+Why ?
+
+to fix python pip SSL error on debian WSL with Cisco Umbrella
+
+How ?
+
+Add Umbrella root CA to list of debian trusted certificates:
+
+- search "Cisco Umbrella Root CA" into chrome browser certificates,
+export it as X509 base64 encode (Cisco_Umbrella_Root_CA.cer)
+
+- copy it to /usr/local/share/ca-certificates/
+
+- change extension from *.cer to *.crt
+
+- ensure file is own by root/root and set file mode like this :
+
+    sudo chmod 644 /usr/local/share/ca-certificates/Cisco_Umbrella_Root_CA.crt
+
+- refresh /etc/ssl/certs/ca-certificates.crt with new certificate :
+
+    sudo dpkg-reconfigure ca-certificates
+
+- now pip can use Umbrella proxy, test it :
+
+    # must return "Verify return code: 0 (ok)"
+    openssl s_client -connect files.pythonhosted.org:443 -CApath /etc/ssl/certs/
