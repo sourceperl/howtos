@@ -34,7 +34,7 @@ curl -i -XPOST "http://localhost:8086/write?db=mydb" --data-binary @mydb_export.
 
 ## InfluxQL commands
 
-### Copy a measurement to another 
+### Copy a measurement to another
 
 **Add GROUP BY for avoid tags become fields on destination.**
 
@@ -56,6 +56,10 @@ SHOW FIELD KEYS FROM ts
 
 ```sql
 DROP MEASUREMENT ts_to_remove
+```
+
+```sql
+DROP SERIES FROM ts_to_purge WHERE tag_name='a-match-name'
 ```
 
 ### Update default retention policy to 120 days with shard of 7 days

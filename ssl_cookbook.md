@@ -1,7 +1,7 @@
 # SSL cookbook
 
 
-## Generate a private key and a self-signed certificate 
+## Generate a private key and a self-signed certificate
 
 ```bash
 # define a prefix for files
