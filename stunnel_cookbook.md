@@ -6,6 +6,8 @@
 ```bash
 # install stunnel
 sudo apt install stunnel
+# launch stunnel at system startup
+sudo systemctl enable stunnel4.service
 # create certificates directories
 sudo mkdir -p /etc/stunnel/certs/
 ```
