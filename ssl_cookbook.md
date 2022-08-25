@@ -108,6 +108,17 @@ Extract subject from a certficate
 openssl crl2pkcs7 -nocrl -certfile myserver-public.cert | openssl pkcs7 -print_certs -noout | grep subject
 ```
 
+Convert certificate and key between PEM format (base64) and DER format (binary)
+Key file have no headers, so here, we assume RSA for convert it.
+
+```bash
+# certificate and key PEM -> DER
+openssl x509 -in myserver-public.pem.cert -outform der -out myserver-public.der.cert
+openssl rsa -inform pem -in mqtt-cli-pico-w.key -outform der -out mqtt-cli-pico-w.der.key
+# certificate and key DER -> PEM
+openssl x509 -inform der -in myserver-public.der.cert -outform pem -out myserver-public.pem.cert
+openssl rsa -inform der -in myserver-public.der.key -outform pem -out myserver-public.pem.key
+```
 
 ## Browser certficate manager shortcut
 
