@@ -109,7 +109,8 @@ openssl crl2pkcs7 -nocrl -certfile myserver-public.cert | openssl pkcs7 -print_c
 ```
 
 Convert certificate and key between PEM format (base64) and DER format (binary)
-Key file have no headers, so here, we assume RSA for convert it.
+
+*Key file have no headers, so here, we assume RSA for convert it.*
 
 ```bash
 # certificate and key PEM -> DER
