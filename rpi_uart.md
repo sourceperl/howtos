@@ -40,3 +40,17 @@ echo "dtoverlay=disable-bt" | sudo tee -a /boot/config.txt
 ```bash
 sudo reboot
 ```
+
+## Raspberry Pi 4B and 400
+
+*Raspberry Pi 4B and 400 have an additional four PL011s (UART2 to 5), which are disabled by default.*
+
+| Name  |   Type    |    Device    |       GPIOs (Tx & Rx)        |                         Comment                             |
+|-------|-----------|--------------|:----------------------------:|-------------------------------------------------------------|
+| UART0 | PL011     | /dev/ttyAMA0 | 32 & 33 (default) or 14 & 15 | by default used by bluetooth HCI service (via /dev/serial1) |
+| UART1 | mini UART | /dev/ttyS0   | 14 & 15 (default) or 32 & 33 | by default used by system console (via /dev/serial0)        |
+| UART2 | PL011     | /dev/ttyAMA1 | 0 & 1                        | add "dtoverlay=uart2" to /boot/config.txt to enable         |
+| UART3 | PL011     | /dev/ttyAMA2 | 4 & 5                        | add "dtoverlay=uart3" to /boot/config.txt to enable         |
+| UART4 | PL011     | /dev/ttyAMA3 | 8 & 9                        | add "dtoverlay=uart4" to /boot/config.txt to enable         |
+| UART5 | PL011     | /dev/ttyAMA4 | 12 & 13                      | add "dtoverlay=uart5" to /boot/config.txt to enable         |
+
