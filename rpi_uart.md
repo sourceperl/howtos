@@ -54,5 +54,7 @@ sudo reboot
 | UART4 | PL011     | /dev/ttyAMA3 | 8 & 9                        | add "dtoverlay=uart4" to /boot/config.txt to enable         |
 | UART5 | PL011     | /dev/ttyAMA4 | 12 & 13                      | add "dtoverlay=uart5" to /boot/config.txt to enable         |
 
+**Beware of GPIO usage conflicts. For example, UART2 uses GPIO 0 & 1 and I2C bus too. So remember to deactivate what is not used.**
+
 more information: https://forums.raspberrypi.com/viewtopic.php?t=244827
 
