@@ -3,7 +3,7 @@
 
 Official documentation:  https://www.raspberrypi.com/documentation/computers/configuration.html#configuring-uarts
 
-## Raspberry Pi 3
+## Raspberry Pi 3, 4B and 400
 
 ### Expose UART0 (PL011) on GPIO 14 (Tx) and 15 (Rx) 
 
@@ -53,4 +53,6 @@ sudo reboot
 | UART3 | PL011     | /dev/ttyAMA2 | 4 & 5                        | add "dtoverlay=uart3" to /boot/config.txt to enable         |
 | UART4 | PL011     | /dev/ttyAMA3 | 8 & 9                        | add "dtoverlay=uart4" to /boot/config.txt to enable         |
 | UART5 | PL011     | /dev/ttyAMA4 | 12 & 13                      | add "dtoverlay=uart5" to /boot/config.txt to enable         |
+
+more information: https://forums.raspberrypi.com/viewtopic.php?t=244827
 
