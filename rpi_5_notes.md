@@ -39,7 +39,23 @@ arm_freq=2800
 gpu_freq=1000
 ```
 
-## Pi box Argon NEO 5 M.2 NVMe (test with SSD cructial 1TB P3 Plus)
+*More at https://www.raspberrypi.com/documentation/computers/config_txt.html#overclocking-options.*
+
+## Fan
+
+```bash
+# get temp of the SoC
+vcgencmd measure_temp
+# read current FAN speed in RPM
+cat /sys/devices/platform/cooling_fan/hwmon/hwmon2/fan1_input
+# read PWM FAN output (at full FAN speed, PWM = 250)
+cat /sys/class/hwmon/hwmon2/pwm1
+```
+
+FAN speed vs temperature at https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#fan-cases.
+
+
+## Pi box Argon NEO 5 M.2 NVMe (test with SSD Crucial 1TB P3 Plus CT1000P3PSSD8)
 
 
 ### PCIe speed update (to increase SSD I/O access time)
