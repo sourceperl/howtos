@@ -34,6 +34,11 @@ ssh-copy-id [USERNAME]@[REMOTE_HOST]
 
 To undo this, you have to manualy edit ~/.ssh/authorized_keys file on REMOTE_HOST and remove the line matching your SSH public key (available in local file ~/.ssh/id_rsa.pub).
 
+## Force password login when keys are set
+
+```bash
+ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password [USERNAME]@[REMOTE_HOST]
+```
 
 ## Local port forward
 
