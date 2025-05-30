@@ -23,3 +23,11 @@ sudo dpkg -i code_1.97.2-1739406006_arm64.deb
 # hold it
 sudo apt-mark hold code
 ```
+
+## Download a DEB package and all its dependencies
+
+```bash
+# an example for the "vim" package (download everything to the local directory)
+apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances vim | \
+grep "^\w" | sort -u | xargs apt download
+```
