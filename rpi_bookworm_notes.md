@@ -1,16 +1,29 @@
 # Raspberry Pi Bookworm notes
 
 
-## SSHd  setup
+## Packages setup
 
-### Turn on service
+### Update system
 
 ```bash
-# with raspi-config: choice 3 > I1 SSH > enable
-sudo raspi-config
+sudo apt update
+sudo apt upgrade -y
 ```
 
-### Add a basic layer of security
+### Mandatory debian packages
+
+```bash
+# all
+sudo apt install -y ack apt-offline git hexedit htop minicom netcat-traditional nmap openssl pv supervisor tree jq vim
+
+# with gui
+sudo apt install -y code putty python3-tk screenruler keepass2
+
+# python
+sudo apt install -y ipython3 pipx python3-pip python3-schedule python3-serial python3-venv python3-wheel
+```
+
+## Security setup
 
 ```bash
 # add packages
@@ -36,6 +49,15 @@ sudo systemctl restart fail2ban.service
 sudo fail2ban-client status sshd
 ```
 
+
+## SSHd setup
+
+### Turn on service
+
+```bash
+# with raspi-config: choice 3 > I1 SSH > enable
+sudo raspi-config
+```
 ### Harden the default configuration
 
 see [SSH cookbook](ssh_cookbook.md)
