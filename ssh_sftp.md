@@ -76,11 +76,11 @@ Match LocalPort 8022
     PubkeyAuthentication yes
 EOF
 
-# ✅ Test SSHD configuration
-sudo sshd -t || { echo "❌ sshd config test failed"; exit 1; }
+# test SSHD configuration
+sudo sshd -t || { echo "sshd config test failed"; exit 1; }
 
-# 🔄 Restart SSH service to apply changes
-sudo systemctl restart sshd && echo "✅ SFTP service on port 8022 configured and SSH restarted"
+# restart SSH service to apply changes
+sudo systemctl restart sshd && echo "SFTP service on port 8022 configured and SSH restarted"
 ```
 
 ## Customize fail2ban to protect SFTP port
@@ -89,4 +89,6 @@ sudo systemctl restart sshd && echo "✅ SFTP service on port 8022 configured an
 
 ## Adjust ufw rules
 
-    **WORK IN PROGRESS**
+```bash
+sudo ufw allow proto tcp from 192.168.0.0/16 to any port 8022
+```
