@@ -79,3 +79,19 @@ to local app at port tcp/80.
 ```bash
 ssh -R 127.0.0.1:8080:127.0.0.1:80 -N user@172.18.40.16
 ```
+
+
+## Fix recurring log message "Stale user environment reading enabled"
+
+Remove `user_readenv=1` in `/etc/pam.d/sshd` near line 47:
+
+```bash
+# In Debian 4.0 (etch), locale-related environment variables were moved to
+# /etc/default/locale, so read that as well.
+session required pam_env.so user_readenv=1 envfile=/etc/default/locale
+```
+
+```bash
+# update file
+sudo nano /etc/pam.d/sshd
+```

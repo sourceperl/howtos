@@ -7,30 +7,26 @@
 # create a random strong password (secure it with tool like keepass)
 sudo apt install -y pwgen
 pwgen -B -s 64 1
-# add harden config file to server conf directory
-sudo useradd -m -s /sbin/nologin sftpuser
+# add user (don't copy default in /etc/skell to home dir)
+sudo useradd --create-home --skel /dev/null --shell /sbin/nologin sftpuser
 # set the password defined above
 sudo passwd sftpuser
 ```
 
-## Configure home directory permissions for chroot
+## Configure a directory for sftp chroot
 
-This is a critical step for ChrootDirectory to work securely. The directory one level above the user's home directory 
-must be owned by root and have very strict permissions.
-
-```bash
-# make root own the user's home directory initially
-sudo chown root:root /home/sftpuser
-# set permissions for the home directory
-sudo chmod 755 /home/sftpuser
-```
-
-## Create a writable directory inside the chroot jail
+This is a critical step for ChrootDirectory to work securely. The root directory must be owned by root 
+and have very strict permissions.
 
 ```bash
-sudo mkdir /home/sftpuser/data
-sudo chown sftpuser:sftpuser /home/sftpuser/data
-sudo chmod 755 /home/sftpuser/data
+# create root dir
+sudo mkdir /srv/sftp
+sudo chown root:root /srv/sftp
+sudo chmod 755 /srv/sftp
+# create a writable directory inside sftp chroot
+sudo mkdir /srv/sftp/data
+sudo chown sftpuser:sftpuser /srv/sftp/data
+sudo chmod 755 /srv/sftp/data
 ```
 
 ## Verify Essential SSHd Configuration
@@ -47,48 +43,22 @@ on some RHEL/CentOS systems.)
 
 ```bash
 # create an SFTP-specific SSH configuration file
-# -> adds a new SFTP-only service on port 8022 with secure settings
 sudo tee /etc/ssh/sshd_config.d/sftp.conf > /dev/null <<'EOF'
-# --- SFTP Service on Port 8022 ---
-Port 8022
-
-# --- Restrict access on port 8022 ---
-Match LocalPort 8022
-
+Match User sftpuser
     # Force internal SFTP (no shell access)
     ForceCommand internal-sftp
 
     # Restrict users to their home directories (requires proper permissions)
-    ChrootDirectory %h
-
-    # Allow only the specific SFTP user
-    AllowUsers sftpuser
-
-    # Hardened security options
-    PermitRootLogin no
-    PermitTunnel no
-    AllowAgentForwarding no
-    AllowTcpForwarding no
-    X11Forwarding no
+    ChrootDirectory /srv/sftp/
 
     # Authentication settings
-    PasswordAuthentication yes    # Set to 'no' to enforce key-only authentication
+    PasswordAuthentication yes
     PubkeyAuthentication yes
 EOF
 
 # test SSHD configuration
-sudo sshd -t || { echo "sshd config test failed"; exit 1; }
+sudo sshd -t
 
 # restart SSH service to apply changes
-sudo systemctl restart sshd && echo "SFTP service on port 8022 configured and SSH restarted"
-```
-
-## Customize fail2ban to protect SFTP port
-
-    **WORK IN PROGRESS**
-
-## Adjust ufw rules
-
-```bash
-sudo ufw allow proto tcp from 192.168.0.0/16 to any port 8022
+sudo systemctl restart sshd
 ```
