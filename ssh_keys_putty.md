@@ -1,18 +1,22 @@
-# SSH file memo
+# SSH keys with OpenSSH and PuTTY
 
-## File naming
-```
-id_<key-algorithm>_<servername>_<purpose>.<format-information>
+## Setup
+
+```bash
+sudo apt install -y putty-tools
 ```
 
 ## File extensions
-- OpenSSH private key:  .pk
+- OpenSSH private key:  .pk (default is nothing, like "id_rsa")
 - OpenSSH public key:   .pub
 - PuTTY private key:    .ppk
 
 *For example id_rsa_myserver_shell.pk is a RSA private key for shell access to myserver with OpenSSH.*
 
 ## Some shell command
+
+File naming: `id_<key-algorithm>_<servername>_<purpose>.<format-information>`
+
 ```bash
 # produce OpenSSH private key(.pk) and public key (.pub)
 ssh-keygen -t rsa -b 4096 -C '' -f id_rsa_srv1_shell
