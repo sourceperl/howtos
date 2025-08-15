@@ -1,18 +1,6 @@
 # SSH cookbook
 
 
-## Harden default configuration on RPI
-
-```bash
-# add harden config file to server conf directory
-cp data/sshd_rpi_harden.conf /etc/ssh/sshd_config.d/
-# check syntax (return nothing = ok)
-sudo sshd -t
-# reload server conf.
-sudo systemctl reload sshd
-```
-
-
 ## View current server configuration
 
 ```bash
