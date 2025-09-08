@@ -78,7 +78,17 @@ sudo ufw allow proto tcp from 192.168.0.0/16 to any port 443
 sudo ufw allow proto tcp from 192.168.0.0/16 to any port 41443
 # turn UFW on
 sudo ufw enable
-# fail2ban check
+# configure fail2ban
+# for [ssh] jail add "backend = systemd" to /etc/fail2ban/jail.d/defaults-debian.conf
+vim /etc/fail2ban/jail.d/defaults-debian.conf
+# add a file to avoid ban trusted admin IP
+cat <<EOF | sudo tee /etc/fail2ban/jail.d/ignore-admin-ip.local > /dev/null
+[DEFAULT]
+# whitelist of trusted IP addresses (which will never be banned)
+ignoreip = 127.0.0.1/8 192.168.0.0/16
+EOF
+# restart
+sudo systemctl restart fail2ban.service
 # request status of sshd jail
 sudo fail2ban-client status sshd
 ```
