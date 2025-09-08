@@ -73,9 +73,9 @@ sudo apt clean
 sudo apt install -y ufw fail2ban
 # add rules
 sudo ufw allow proto tcp from 0.0.0.0/0 to any port 22
-sudo ufw allow proto tcp from 192.168.0.0/24 to any port 80
-sudo ufw allow proto tcp from 192.168.0.0/24 to any port 443
-sudo ufw allow proto tcp from 192.168.0.0/24 to any port 41443
+sudo ufw allow proto tcp from 192.168.0.0/16 to any port 80
+sudo ufw allow proto tcp from 192.168.0.0/16 to any port 443
+sudo ufw allow proto tcp from 192.168.0.0/16 to any port 41443
 # turn UFW on
 sudo ufw enable
 # fail2ban check
