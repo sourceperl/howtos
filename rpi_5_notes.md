@@ -20,9 +20,9 @@ Some checks :
 
 ```bash
 # read current charging voltage in microvolts (return 0 if dtparam "rtc_bbat_vchg" is unset)
-cat /sys/devices/platform/soc/soc\:rpi_rtc/rtc/rtc0/charging_voltage
+cat /sys/devices/platform/soc@107c000000/soc@107c000000\:rpi_rtc/rtc/rtc0/charging_voltage
 # read current battery voltage in microvolts (return 2964099 for my test)
-cat /sys/devices/platform/soc/soc\:rpi_rtc/rtc/rtc0/battery_voltage 
+cat /sys/devices/platform/soc@107c000000/soc@107c000000\:rpi_rtc/rtc/rtc0/battery_voltage
 ```
 
 ## CPU and GPU overclock
